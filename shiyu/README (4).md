@@ -4,7 +4,7 @@
 
 ---
 
-## 🌟 Features
+Features
 
 - User registration and login (via `localStorage`)
 - Dynamic dashboard with:
@@ -16,16 +16,16 @@
 
 ---
 
-## ⚙️ Virtual Environment Setup
+## Virtual Environment Setup
 
-### 🔧 Prerequisites
+### Prerequisites
 
 - [Node.js](https://nodejs.org/) (v14+)
 - [Live Server Extension](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) *(for VSCode users)* or any static file server
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### 1. Clone the Repository
 
@@ -34,7 +34,7 @@ git clone https://github.com/your-username/studysync.git
 cd studysync
 ```
 
-### 2. Open the Project in Your Editor
+### Open the Project in Your Editor
 
 Use any IDE or code editor (VSCode recommended).
 
@@ -72,13 +72,13 @@ Visit: `http://localhost:3000`
 
 ---
 
-## 🔐 Environment
+## Environment
 
 No backend or database is used. All data is stored temporarily using `localStorage` in the browser. For production, connect with a real backend.
 
 ---
 
-## 🧪 Testing
+##  Testing
 
 You can manually test:
 - Registration flow (`register.html`)
@@ -94,7 +94,7 @@ Then extract logic from `auth.js` or `script.js` into testable functions.
 
 ---
 
-## 📦 Dependencies
+## Dependencies
 
 None yet, but to manage future packages:
 
@@ -105,7 +105,7 @@ npm install package-name --save
 
 ---
 
-## 📌 Future Improvements
+##  Future Improvements
 
 - Connect to a backend API
 - Add persistent user sessions
@@ -114,7 +114,7 @@ npm install package-name --save
 
 ---
 
-## 🧑‍💻 Author
+## Author
 
-**Shiyu**  
+**kelly peng**  
 Front-end Developer & Designer
