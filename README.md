@@ -72,13 +72,10 @@ By the end of this project, the app should be able to:
 
 Long term, this app has the potential to be integrated into university systems as a supplementary social-academic tool, improving both academic outcomes and campus community-building.
 
-# StudySync – Student Organizer Web App
-
-**StudySync** is a lightweight front-end application designed to help students manage their courses, events, and personal study schedule. It supports user registration, login, and a personalized dashboard featuring a calendar and event reminders.
-
+# developer update
 ---
 
-## 🌟 Feature List
+## Feature List
 
 - User registration and login (via `localStorage`)
 - Calendar-based event scheduling with dynamic modal interface
@@ -89,7 +86,7 @@ Long term, this app has the potential to be integrated into university systems a
 
 ---
 
-## ⚙️ Setup and Usage Instructions
+## Setup and Usage Instructions
 
 ### Prerequisites
 
