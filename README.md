@@ -71,3 +71,91 @@ By the end of this project, the app should be able to:
 - Provide an intuitive and enjoyable user experience tailored to student life.
 
 Long term, this app has the potential to be integrated into university systems as a supplementary social-academic tool, improving both academic outcomes and campus community-building.
+
+# StudySync – Student Organizer Web App
+
+**StudySync** is a lightweight front-end application designed to help students manage their courses, events, and personal study schedule. It supports user registration, login, and a personalized dashboard featuring a calendar and event reminders.
+
+---
+
+## 🌟 Feature List
+
+- User registration and login (via `localStorage`)
+- Calendar-based event scheduling with dynamic modal interface
+- Event CRUD (create, edit, delete) tied to specific dates
+- User profile page with avatar, stats, and dashboard navigation
+- Responsive UI optimized for desktop and mobile
+- Frontend validation for passwords and duplicate inputs
+
+---
+
+## ⚙️ Setup and Usage Instructions
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) (v14+)
+- [Live Server Extension](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) for VSCode or a static file server
+
+### Quick Start
+
+1. **Clone the Repository**
+
+git clone https://github.com/your-username/studysync.git
+cd studysync
+```
+
+2. **Open with Live Server**
+
+Open `index.html` with Live Server or use a simple static server:
+
+```bash
+# Using Python 3
+python -m http.server 3000
+```
+
+3. **Access the App**
+
+Open your browser and visit:  
+`http://localhost:3000`
+
+---
+
+## 📁 File Structure
+
+.
+├── index.html           # Homepage/Dashboard
+├── profile.html         # User Profile & Calendar
+├── login.html           # Login page
+├── register.html        # Registration page
+├── script.js            # Main logic for calendar and modals
+├── auth.js              # AuthService for user handling
+├── css/
+│   └── styles.css       # Optional styling file
+└── README.md
+```
+
+
+
+## Demo Data Behavior
+
+- User credentials are stored temporarily in `localStorage`.
+- On registration, users are redirected to the login page.
+- Events added to the calendar exist in memory only and do not persist after refresh.
+- Demo logic includes input validation and password match checking.
+
+
+
+##  Customization Notes
+
+- To integrate a backend, replace the logic in `auth.js` and `script.js` with API calls.
+- Add a persistent database to store events and user profiles.
+- Expand modal features to support tags, color coding, or collaboration.
+- Customize visuals in `styles.css` or inline CSS in each HTML file.
+
+---
+
+## Author
+
+**Kelly peng**  
+Front-end Developer & Designer
+
