@@ -1,4 +1,3 @@
-shiyu/Readme.md
 
 # StudySync – Student Organizer Web App
 
