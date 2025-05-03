@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - StudySync</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #8b5cf6;
+            --primary-light: #a78bfa;
+            --secondary: #f472b6;
+            --secondary-light: #f9a8d4;
+            --tertiary: #facc15;
+            --success: #22c55e;
+            --dark: #1f2937;
+            --light: #f3f4f6;
+            --gray: #6b7280;
+            --border-radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark);
+            background-color: #f0f9ff;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, .logo-text {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Background shapes */
+        .bg-shape {
+            position: fixed;
+            z-index: -1;
+            border-radius: 50%;
+            opacity: 0.1;
+        }
+
+        .bg-shape-1 {
+            top: -250px;
+            right: -150px;
+            width: 500px;
+            height: 500px;
+            background-color: var(--primary);
+        }
+
+        .bg-shape-2 {
+            bottom: -300px;
+            left: -200px;
+            width: 600px;
+            height: 600px;
+            background-color: var(--secondary);
+        }
+
+        .bg-shape-3 {
+            top: 40%;
+            left: 45%;
+            width: 300px;
+            height: 300px;
+            background-color: var(--tertiary);
+            opacity: 0.05;
+        }
+
+        /* Small decorative elements */
+        .small-shape {
+            position: fixed;
+            z-index: -1;
+            opacity: 0.2;
+        }
+
+        .asterisk {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        .circle {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--secondary);
+        }
+
+        .squiggle {
+            width: 50px;
+            height: 20px;
+        }
+
+        /* Header styles */
+        header {
+            background-color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--dark);
+        }
+
+        .logo-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            background-color: var(--primary);
+            border-radius: 8px;
+            margin-right: 10px;
+            color: white;
+            font-size: 18px;
+        }
+
+        .logo-text {
+            font-size: 22px;
+            font-weight: 500;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-item {
+            margin: 0 15px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 5px 0;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary);
+        }
+
+        .nav-link.active {
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .search-icon, .notification-icon {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+
+        .search-icon:hover, .notification-icon:hover {
+            background-color: var(--light);
+            color: var(--primary);
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid var(--light);
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Main Dashboard Layout */
+        .dashboard {
+            display: grid;
+            grid-template-columns: 70px 1fr 300px;
+            min-height: calc(100vh - 65px);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background-color: var(--primary);
+            padding: 20px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .sidebar-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .sidebar-icon:hover, .sidebar-icon.active {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .sidebar-icon.active {
+            background-color: white;
+            color: var(--primary);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 25px;
+            background-color: #f8fafc;
+        }
+
+        .welcome-header {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .welcome-card {
+            background-color: #56c4c5;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .welcome-text h2 {
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+
+        .welcome-text p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .welcome-image {
+            width: 120px;
+            height: 120px;
+            overflow: hidden;
+        }
+
+        .welcome-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .stats-card {
+            background-color: #818cf8;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            color: white;
+        }
+
+        .stats-header {
+            margin-bottom: 15px;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .stat-label {
+            width: 100px;
+            font-size: 0.9rem;
+        }
+
+        .stat-bar {
+            flex: 1;
+            height: 8px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .stat-progress {
+            position: absolute;
+            height: 100%;
+            background-color: white;
+            border-radius: 4px;
+        }
+
+        .stat-value {
+            width: 40px;
+            text-align: right;
+            font-size: 0.9rem;
+            margin-left: 10px;
+        }
+
+        .quicklinks {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .quicklink-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .quicklink-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .quicklink-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+
+        .quicklink-icon.blue {
+            background-color: #e0f2fe;
+            color: #0ea5e9;
+        }
+
+        .quicklink-icon.purple {
+            background-color: #f3e8ff;
+            color: #a855f7;
+        }
+
+        .quicklink-icon.yellow {
+            background-color: #fef9c3;
+            color: #eab308;
+        }
+
+        .quicklink-text {
+            font-weight: 500;
+        }
+
+        .calendar-section {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .calendar-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .calendar-days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            text-align: center;
+            font-weight: 500;
+            color: var(--gray);
+            margin-bottom: 10px;
+        }
+
+        .calendar-dates {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            grid-gap: 5px;
+        }
+
+        .date-cell {
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .date-cell:hover {
+            background-color: var(--light);
+        }
+
+        .date-cell.today {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .date-cell.has-event::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background-color: var(--secondary);
+        }
+
+        .date-cell.other-month {
+            color: #cbd5e1;
+        }
+
+        .appointment {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8fafc;
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--tertiary);
+        }
+
+        .appointment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .appointment-icon {
+            width: 30px;
+            height: 30px;
+            background-color: var(--tertiary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .appointment-details {
+            display: flex;
+            align-items: center;
+        }
+
+        .appointment-time {
+            background-color: #e2e8f0;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.85rem;
+            margin-right: 10px;
+        }
+
+        /* Sidebar Profile */
+        .profile-sidebar {
+            background-color: white;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            border-left: 1px solid #e2e8f0;
+        }
+
+        .profile-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e2e8f0;
+            margin-bottom: 20px;
+        }
+
+        .profile-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .profile-email {
+            color: var(--gray);
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+        }
+
+        .profile-stats {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .profile-stat {
+            text-align: center;
+            flex: 1;
+        }
+
+        .stat-value {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--gray);
+        }
+
+        .sidebar-section {
+            margin-bottom: 30px;
+        }
+
+        .sidebar-section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .sidebar-section-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .see-all {
+            color: var(--primary);
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+
+        .recent-results {
+            background-color: #f8fafc;
+            border-radius: var(--border-radius);
+            padding: 15px;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .recent-results p {
+            color: var(--gray);
+        }
+
+        .reminders-list {
+            list-style: none;
+        }
+
+        .reminder-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .reminder-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            background-color: #e0f2fe;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: #0ea5e9;
+        }
+
+        .reminder-details {
+            flex: 1;
+        }
+
+        .reminder-title {
+            font-weight: 500;
+            margin-bottom: 3px;
+        }
+
+        .reminder-date {
+            font-size: 0.75rem;
+            color: var(--gray);
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .page-button {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            background-color: #e2e8f0;
+            cursor: pointer;
+            margin: 0 5px;
+        }
+
+        .page-button.active {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .page-button.prev, .page-button.next {
+            background-color: white;
+            border: 1px solid #e2e8f0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background decorative shapes -->
+    <div class="bg-shape bg-shape-1"></div>
+    <div class="bg-shape bg-shape-2"></div>
+    <div class="bg-shape bg-shape-3"></div>
+
+    <!-- Small decorative elements scattered throughout -->
+    <div class="small-shape asterisk" style="top: 20%; left: 10%;">✱</div>
+    <div class="small-shape asterisk" style="top: 50%; right: 15%;">✱</div>
+    <div class="small-shape asterisk" style="bottom: 30%; left: 20%;">✱</div>
+
+    <div class="small-shape circle" style="top: 25%; right: 25%;"></div>
+    <div class="small-shape circle" style="bottom: 15%; left: 40%;"></div>
+
+    <svg class="small-shape squiggle" style="top: 40%; left: 30%;" viewBox="0 0 50 20" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,10 Q12.5,0 25,10 T50,10" fill="none" stroke="#8b5cf6" stroke-width="2" />
+    </svg>
+
+    <svg class="small-shape squiggle" style="bottom: 20%; right: 10%;" viewBox="0 0 50 20" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,10 Q12.5,0 25,10 T50,10" fill="none" stroke="#f472b6" stroke-width="2" />
+    </svg>
+
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <span>✱</span>
+                </div>
+                <div class="logo-text">StudySync</div>
+            </a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="profile.html" class="nav-link active">Profile</a></li>
+                <li class="nav-item"><a href="matches.html" class="nav-link">Matches</a></li>
+                <li class="nav-item"><a href="groups.html" class="nav-link">Groups</a></li>
+                <li class="nav-item"><a href="about.html" class="nav-link">About Us</a></li>
+            </ul>
+            <div class="user-profile">
+                <button class="search-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                </button>
+                <button class="notification-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                </button>
+                <div class="avatar">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'%3E%3Ccircle cx='25' cy='25' r='25' fill='%23f3f4f6'/%3E%3Ccircle cx='25' cy='20' r='8' fill='%236b7280'/%3E%3Cpath d='M25,50 C34,50 40,42 40,33 C40,33 37,28 25,28 C13,28 10,33 10,33 C10,42 16,50 25,50 Z' fill='%236b7280'/%3E%3C/svg%3E" alt="User Avatar">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="dashboard" style="grid-template-columns: 1fr 350px;">
+        <!-- Main Content Area -->
+        <div class="main-content" style="grid-column: 1 / span 2;">
+            <div class="welcome-header">
+                <div class="welcome-card">
+                    <div class="welcome-text">
+                        <h2>Welcome back, Alex!</h2>
+                        <p>I hope you're well. How can I help you today?</p>
+                        <button class="btn" style="background-color: white; color: #56c4c5; padding: 8px 15px; border: none; border-radius: 8px; font-weight: 500; margin-top: 10px; cursor: pointer;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 5px; position: relative; top: 2px;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                            Ask me
+                        </button>
+                    </div>
+                    <div class="welcome-image">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='100' fill='%23f3f4f6'/%3E%3Ccircle cx='100' cy='85' r='30' fill='%236b7280'/%3E%3Cpath d='M100,200 C134,200 150,170 150,140 C150,140 130,120 100,120 C70,120 50,140 50,140 C50,170 66,200 100,200 Z' fill='%236b7280'/%3E%3C/svg%3E" alt="Welcome Illustration">
+                    </div>
+                </div>
+
+                <div class="stats-card">
+                    <div class="stats-header">
+                        <h3>Study Progress</h3>
+                        <p>Track your performance and improvements</p>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">CS301</div>
+                        <div class="stat-bar">
+                            <div class="stat-progress" style="width: 87%"></div>
+                        </div>
+                        <div class="stat-value">87%</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">CS315</div>
+                        <div class="stat-bar">
+                            <div class="stat-progress" style="width: 65%"></div>
+                        </div>
+                        <div class="stat-value">65%</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">MATH240</div>
+                        <div class="stat-bar">
+                            <div class="stat-progress" style="width: 92%"></div>
+                        </div>
+                        <div class="stat-value">92%</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quicklinks">
+                <div class="quicklink-card">
+                    <div class="quicklink-icon blue">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                    </div>
+                    <div class="quicklink-text">Academic Info</div>
+                </div>
+                <div class="quicklink-card">
+                    <div class="quicklink-icon purple">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5a5.5 5.5 0 0 1 3.096 10.047 9 9 0 0 1 5.9 8.181.75.75 0 1 1-1.499.044 7.5 7.5 0 0 0-14.993 0 .75.75 0 0 1-1.5-.045 9 9 0 0 1 5.9-8.18A5.5 5.5 0 0 1 12 2.5ZM8 8a4 4 0 1 0 8 0 4 4 0 0 0-8 0Z"></path></svg>
+                    </div>
+                    <div class="quicklink-text">Study Preferences</div>
+                </div>
+                <div class="quicklink-card">
+                    <div class="quicklink-icon yellow">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    </div>
+                    <div class="quicklink-text">Availability</div>
+                </div>
+            </div>
+
+            <div class="calendar-section">
+                <div class="calendar-header">
+                    <h3 class="calendar-title">September</h3>
+                    <div class="calendar-nav">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="cursor: pointer;"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="cursor: pointer; margin-left: 15px;"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </div>
+                </div>
+
+                <div class="calendar-days">
+                    <div>MON</div>
+                    <div>TUE</div>
+                    <div>WED</div>
+                    <div>THU</div>
+                    <div>FRI</div>
+                    <div>SAT</div>
+                    <div>SUN</div>
+                </div>
+
+                <div class="calendar-dates">
+                    <div class="date-cell other-month">28</div>
+                    <div class="date-cell other-month">29</div>
+                    <div class="date-cell other-month">30</div>
+                    <div class="date-cell other-month">31</div>
+                    <div class="date-cell">1</div>
+                    <div class="date-cell">2</div>
+                    <div class="date-cell">3</div>
+                    <div class="date-cell">4</div>
+                    <div class="date-cell">5</div>
+                    <div class="date-cell">6</div>
+                    <div class="date-cell has-event">7</div>
+                    <div class="date-cell">8</div>
+                    <div class="date-cell">9</div>
+                    <div class="date-cell">10</div>
+                    <div class="date-cell">11</div>
+                    <div class="date-cell">12</div>
+                    <div class="date-cell">13</div>
+                    <div class="date-cell">14</div>
+                    <div class="date-cell">15</div>
+                    <div class="date-cell">16</div>
+                    <div class="date-cell">17</div>
+                    <div class="date-cell">18</div>
+                    <div class="date-cell">19</div>
+                    <div class="date-cell">20</div>
+                    <div class="date-cell today">21</div>
+                    <div class="date-cell">22</div>
+                    <div class="date-cell">23</div>
+                    <div class="date-cell">24</div>
+                    <div class="date-cell">25</div>
+                    <div class="date-cell">26</div>
+                    <div class="date-cell">27</div>
+                    <div class="date-cell">28</div>
+                    <div class="date-cell">29</div>
+                    <div class="date-cell">30</div>
+                    <div class="date-cell other-month">1</div>
+                </div>
+
+                <div class="appointment">
+                    <div class="appointment-header">
+                        <h4>Upcoming Study Session</h4>
+                        <div class="appointment-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                        </div>
+                    </div>
+                    <div class="appointment-details">
+                        <div class="appointment-time">13:30 - 15:00</div>
+                        <div>CS315: AI Project Group Meeting</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="profile-sidebar">
+        <div class="profile-header">
+            <div class="profile-avatar">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'%3E%3Ccircle cx='25' cy='25' r='25' fill='%23f3f4f6'/%3E%3Ccircle cx='25' cy='20' r='8' fill='%236b7280'/%3E%3Cpath d='M25,50 C34,50 40,42 40,33 C40,33 37,28 25,28 C13,28 10,33 10,33 C10,42 16,50 25,50 Z' fill='%236b7280'/%3E%3C/svg%3E" alt="User Avatar">
+            </div>
+            <div class="profile-name">Alex</div>
+            <div class="profile-email">alex@email.com</div>
+        </div>
+        <!-- 在这里插入日历 -->
+    </div>
+</body>
+</html>
