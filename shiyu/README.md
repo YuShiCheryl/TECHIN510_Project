@@ -1,3 +1,5 @@
+shiyu/Readme.md
+
 # StudySync – Student Organizer Web App
 
 **StudySync** is a lightweight front-end application designed to help students manage their courses, events, and personal study schedule. It supports user registration, login, and a personalized dashboard featuring a calendar and event reminders.
