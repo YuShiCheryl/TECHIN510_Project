@@ -2,7 +2,6 @@
 
 **StudySync** is a lightweight front-end application designed to help students manage their courses, events, and personal study schedule. It supports user registration, login, and a personalized dashboard featuring a calendar and event reminders.
 
----
 
 Features
 
@@ -14,7 +13,7 @@ Features
 - Responsive and visually engaging design
 - Event type tagging (e.g., Study Session, Group Meeting)
 
----
+
 
 ## Virtual Environment Setup
 
@@ -22,8 +21,6 @@ Features
 
 - [Node.js](https://nodejs.org/) (v14+)
 - [Live Server Extension](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) *(for VSCode users)* or any static file server
-
----
 
 ## Getting Started
 
@@ -55,9 +52,9 @@ Visit: `http://localhost:3000`
 
 ---
 
-## 📁 File Structure
+## File Structure
 
-```
+
 .
 ├── index.html           # Homepage/Dashboard
 ├── profile.html         # User Profile & Calendar
@@ -76,7 +73,6 @@ Visit: `http://localhost:3000`
 
 No backend or database is used. All data is stored temporarily using `localStorage` in the browser. For production, connect with a real backend.
 
----
 
 ##  Testing
 
@@ -92,18 +88,15 @@ npm install --save-dev jest
 ```
 Then extract logic from `auth.js` or `script.js` into testable functions.
 
----
+
 
 ## Dependencies
 
 None yet, but to manage future packages:
 
-```bash
+
 npm init -y
 npm install package-name --save
-```
-
----
 
 ##  Future Improvements
 
@@ -112,7 +105,6 @@ npm install package-name --save
 - Implement color-coded event filters
 - Add Google Calendar integration
 
----
 
 ## Author
 
