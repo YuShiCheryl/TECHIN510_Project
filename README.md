@@ -4,8 +4,6 @@ StudySync is a web application designed to connect university students with comp
 
 **Live Application**: [https://nimble-frangollo-0e905e.netlify.app/](https://nimble-frangollo-0e905e.netlify.app/)
 
-![StudySync Platform](https://via.placeholder.com/800x400?text=StudySync+Platform)
-
 ## Project Overview
 
 ### Objectives
