@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Test - StudySync</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .test-button {
+            background: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+        .result {
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        .success { background: #d4edda; border-color: #c3e6cb; }
+        .error { background: #f8d7da; border-color: #f5c6cb; }
+    </style>
+</head>
+<body>
+    <h1>StudySync Registration System Test</h1>
+    
+    <div>
+        <button class="test-button" onclick="testBasicRegistration()">Test Basic Registration</button>
+        <button class="test-button" onclick="testDuplicateEmail()">Test Duplicate Email</button>
+        <button class="test-button" onclick="testInvalidEmail()">Test Invalid Email</button>
+        <button class="test-button" onclick="testShortPassword()">Test Short Password</button>
+        <button class="test-button" onclick="showAllUsers()">Show All Users</button>
+        <button class="test-button" onclick="clearDatabase()">Clear Database</button>
+    </div>
+    
+    <div id="results"></div>
+
+    <script src="js/user-database.js"></script>
+    <script>
+        function addResult(message, type = 'success') {
+            const resultsDiv = document.getElementById('results');
+            const resultDiv = document.createElement('div');
+            resultDiv.className = `result ${type}`;
+            resultDiv.innerHTML = `<strong>${new Date().toLocaleTimeString()}</strong>: ${message}`;
+            resultsDiv.insertBefore(resultDiv, resultsDiv.firstChild);
+        }
+
+        function testBasicRegistration() {
+            const testUser = {
+                name: 'Test User ' + Date.now(),
+                email: 'test' + Date.now() + '@example.com',
+                password: 'testpass123'
+            };
+            
+            console.log('Testing registration:', testUser);
+            const result = UserDatabase.registerUser(testUser);
+            
+            if (result.success) {
+                addResult(`✅ Registration successful for ${testUser.email}. User ID: ${result.user.id}`, 'success');
+            } else {
+                addResult(`❌ Registration failed: ${result.error}`, 'error');
+            }
+        }
+
+        function testDuplicateEmail() {
+            const email = 'duplicate@test.com';
+            
+            // First registration
+            const result1 = UserDatabase.registerUser({
+                name: 'First User',
+                email: email,
+                password: 'password1'
+            });
+            
+            if (result1.success) {
+                addResult(`✅ First registration successful for ${email}`, 'success');
+                
+                // Second registration with same email
+                const result2 = UserDatabase.registerUser({
+                    name: 'Second User',
+                    email: email,
+                    password: 'password2'
+                });
+                
+                if (!result2.success && result2.error.includes('already registered')) {
+                    addResult(`✅ Duplicate email detection working: ${result2.error}`, 'success');
+                } else {
+                    addResult(`❌ Duplicate email detection failed`, 'error');
+                }
+            } else {
+                addResult(`❌ First registration failed: ${result1.error}`, 'error');
+            }
+        }
+
+        function testInvalidEmail() {
+            const result = UserDatabase.registerUser({
+                name: 'Test User',
+                email: 'invalid-email',
+                password: 'password123'
+            });
+            
+            if (!result.success && result.error.includes('Invalid email')) {
+                addResult(`✅ Email validation working: ${result.error}`, 'success');
+            } else {
+                addResult(`❌ Email validation failed`, 'error');
+            }
+        }
+
+        function testShortPassword() {
+            const result = UserDatabase.registerUser({
+                name: 'Test User',
+                email: 'test@example.com',
+                password: '123'
+            });
+            
+            if (!result.success && result.error.includes('at least 6 characters')) {
+                addResult(`✅ Password validation working: ${result.error}`, 'success');
+            } else {
+                addResult(`❌ Password validation failed`, 'error');
+            }
+        }
+
+        function showAllUsers() {
+            const users = UserDatabase.getAllUsers();
+            const stats = UserDatabase.getStats();
+            
+            addResult(`📊 Database contains ${stats.totalUsers} users (${stats.demoUsers} demo, ${stats.registeredUsers} registered)`, 'success');
+            
+            users.forEach((user, index) => {
+                addResult(`${index + 1}. ${user.name} (${user.email}) - ID: ${user.id}`, 'success');
+            });
+        }
+
+        function clearDatabase() {
+            if (confirm('Are you sure you want to clear all user data?')) {
+                const result = UserDatabase.clearAllUsers();
+                if (result.success) {
+                    addResult('🗑️ Database cleared successfully', 'success');
+                    // Reinitialize with demo users
+                    UserDatabase.init();
+                } else {
+                    addResult('❌ Failed to clear database', 'error');
+                }
+            }
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', function() {
+            addResult('🚀 Registration test page loaded. UserDatabase initialized.', 'success');
+            showAllUsers();
+        });
+    </script>
+</body>
+</html> 

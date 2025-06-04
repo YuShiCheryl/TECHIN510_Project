@@ -1,0 +1,12 @@
+/*    /index.html   200
+
+# Redirect root to index.html
+/     /index.html   200
+
+# Handle SPA routing
+/home     /index.html   200
+/profile  /profile.html  200
+/matches  /matches.html  200
+/login    /login.html    200
+/register /register.html 200
+/admin    /admin.html    200 
