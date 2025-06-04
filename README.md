@@ -63,68 +63,128 @@ StudySync is a web application designed to connect university students with comp
 
 ---
 
-## Setup Instructions
+## 🚀 Setup Instructions
 
 ### Prerequisites
-- Modern web browser (Chrome, Firefox, Safari, Edge)
-- Internet connection
-- Node.js and npm (optional, for local development)
+- **Modern web browser** (Chrome, Firefox, Safari, Edge)
+- **Internet connection**
+- **Python 3.x** (for local development server, optional)
 
-### Installation Options
+### Project Type
+This is a **static web application** built with HTML, CSS, and JavaScript. No additional dependencies or build processes are required.
 
-#### Option 1: Direct Access (No Installation Required)
-The application is deployed and can be accessed directly at:
+---
+
+## 📋 Running the Application
+
+### Option 1: Access Live Version (Recommended)
+The application is already deployed and ready to use:
 ```
-https://nimble-frangollo-0e905e.netlify.app/
+🌐 https://nimble-frangollo-0e905e.netlify.app/
 ```
+Simply click the link above - no installation required!
 
-#### Option 2: Local Development Setup
+---
 
-1. **Clone the repository:**
+### Option 2: Run Locally
+
+#### Method A: Using Python HTTP Server (Recommended for Development)
 ```bash
-git clone https://github.com/yourusername/studysync.git
-cd studysync
+# 1. Navigate to the project directory
+cd TECHIN510_StudySync-main
+
+# 2. Start a local server on port 8000
+python3 -m http.server 8000
+
+# 3. Open your browser and visit:
+# http://localhost:8000
 ```
 
-2. **Set up virtual environment (if using Python backend):**
+#### Method B: Direct File Access
 ```bash
-# Create virtual environment
-python -m venv studysync-env
+# 1. Navigate to the project directory
+cd TECHIN510_StudySync-main
 
-# Activate virtual environment
+# 2. Open the main page directly in your browser
+open index.html
+
 # On Windows:
-studysync-env\Scripts\activate
-# On macOS/Linux:
-source studysync-env/bin/activate
+# start index.html
+
+# On Linux:
+# xdg-open index.html
 ```
 
-3. **Install dependencies:**
+---
+
+## 📁 Project Structure
+```
+TECHIN510_StudySync-main/
+├── index.html              # Homepage - main entry point
+├── login.html              # User login page
+├── register.html           # User registration page  
+├── profile.html            # User profile management
+├── matches.html            # Study partner matching page
+├── admin.html              # Admin dashboard
+├── about.html              # About page
+├── test-registration.html  # Registration testing page
+├── styles.css              # Main stylesheet
+├── css/                    # Additional stylesheets
+├── js/                     # JavaScript files
+├── deploy/                 # Deployment files
+├── README.md              # This file
+└── Developer.md           # Developer documentation
+```
+
+---
+
+## 🎯 Getting Started
+
+### For New Users
+1. **Access the application** using Option 1 or 2 above
+2. **Register an account** by clicking "Register" on the homepage
+3. **Complete your profile** with academic info and study preferences
+4. **Set your availability** using the interactive calendar
+5. **Browse matches** to find compatible study partners
+6. **Connect with potential partners** and start studying together!
+
+### For Developers
+1. **Clone or download** the project
+2. **Use Python HTTP server** for local development (Method A above)
+3. **Edit HTML/CSS/JS files** directly - changes appear immediately
+4. **Test in multiple browsers** to ensure compatibility
+5. **No build process required** - it's ready to run!
+
+---
+
+## 🔧 Troubleshooting
+
+### Common Issues
+
+**"Address already in use" error:**
 ```bash
-# For frontend dependencies
-npm install
-
-# For Python dependencies (if applicable)
-pip install -r requirements.txt
+# Try a different port
+python3 -m http.server 8080
+# Then visit: http://localhost:8080
 ```
 
-4. **Start the development server:**
+**Browser can't load the page:**
+- Check if the server is running in your terminal
+- Try refreshing the page (Ctrl+F5 / Cmd+Shift+R)
+- Clear browser cache
+- Try a different browser
+
+**Files not updating:**
+- Hard refresh the browser (Ctrl+F5 / Cmd+Shift+R)
+- Check if you're editing the correct files
+- Restart the local server
+
+### Port Options
+If port 8000 is busy, try these alternatives:
 ```bash
-npm start
-```
-
-5. **Access the application:**
-   - Open your browser and navigate to `http://localhost:3000`
-
-### Project Structure
-```
-studysync/
-├── static/              # Static assets (CSS, JS, images)
-├── templates/           # HTML templates
-├── src/                 # Source code
-├── app.py              # Main application file
-├── requirements.txt    # Python dependencies
-├── package.json        # Node.js dependencies
-└── README.md          # This file
+python3 -m http.server 3000    # http://localhost:3000
+python3 -m http.server 8080    # http://localhost:8080
+python3 -m http.server 5000    # http://localhost:5000
 ```
 
 ---
