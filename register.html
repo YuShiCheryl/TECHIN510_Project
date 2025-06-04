@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - StudySync</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .register-container {
+            max-width: 480px;
+            margin: 40px auto;
+            padding: 40px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .register-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--primary);
+        }
+
+        .register-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .form-group input {
+            padding: 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        .register-btn {
+            background: var(--primary);
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .register-btn:hover {
+            background: var(--primary-light);
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+            color: var(--gray);
+        }
+
+        .login-link a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: #ef4444;
+            font-size: 14px;
+            margin-top: 4px;
+            display: none;
+        }
+
+        .form-input {
+            padding: 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .form-input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        .form-input.error {
+            border-color: #ef4444 !important;
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1) !important;
+        }
+        .form-input.success {
+            border-color: #22c55e !important;
+            box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1) !important;
+        }
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background decorative shapes -->
+    <div class="bg-shape bg-shape-1"></div>
+    <div class="bg-shape bg-shape-2"></div>
+    <div class="bg-shape bg-shape-3"></div>
+
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <span>✱</span>
+                </div>
+                <div class="logo-text">StudySync</div>
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="register-container">
+                <h2 class="register-title">Create Your Account</h2>
+                <form id="register-form" class="register-form">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" class="form-input" required>
+                        <span class="error-message" id="name-error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" class="form-input" required>
+                        <span class="error-message" id="email-error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" class="form-input" required>
+                        <span class="error-message" id="password-error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">Confirm Password</label>
+                        <input type="password" id="confirm-password" name="confirm-password" class="form-input" required>
+                        <span class="error-message" id="confirm-password-error"></span>
+                    </div>
+                    <button type="submit" class="register-btn">Create Account</button>
+                </form>
+                <p class="login-link">
+                    Already have an account? <a href="login.html">Log in</a>
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/auth.js"></script>
+    <script src="js/user-database.js"></script>
+    <script>
+        // Add form validation styling
+        const style = document.createElement('style');
+        style.textContent = `
+            .form-input {
+                padding: 12px;
+                border: 1px solid #e2e8f0;
+                border-radius: 8px;
+                font-size: 16px;
+                transition: border-color 0.3s, box-shadow 0.3s;
+                width: 100%;
+                box-sizing: border-box;
+            }
+            .form-input:focus {
+                border-color: var(--primary);
+                outline: none;
+                box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+            }
+            .form-input.error {
+                border-color: #ef4444 !important;
+                box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1) !important;
+            }
+            .form-input.success {
+                border-color: #22c55e !important;
+                box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1) !important;
+            }
+            .loading {
+                opacity: 0.7;
+                pointer-events: none;
+            }
+        `;
+        document.head.appendChild(style);
+
+        document.getElementById('register-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Reset error messages and styling
+            document.querySelectorAll('.error-message').forEach(msg => {
+                msg.style.display = 'none';
+            });
+            document.querySelectorAll('.form-input').forEach(input => {
+                input.classList.remove('error', 'success');
+            });
+
+            // Get form data
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+
+            let hasErrors = false;
+
+            // Validate form fields
+            if (!name) {
+                showFieldError('name', 'Full name is required');
+                hasErrors = true;
+            } else if (name.length < 2) {
+                showFieldError('name', 'Name must be at least 2 characters long');
+                hasErrors = true;
+            } else {
+                document.getElementById('name').classList.add('success');
+            }
+
+            if (!email) {
+                showFieldError('email', 'Email address is required');
+                hasErrors = true;
+            } else {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    showFieldError('email', 'Please enter a valid email address');
+                    hasErrors = true;
+                } else {
+                    document.getElementById('email').classList.add('success');
+                }
+            }
+
+            if (!password) {
+                showFieldError('password', 'Password is required');
+                hasErrors = true;
+            } else if (password.length < 6) {
+                showFieldError('password', 'Password must be at least 6 characters long');
+                hasErrors = true;
+            } else {
+                document.getElementById('password').classList.add('success');
+            }
+
+            if (!confirmPassword) {
+                showFieldError('confirm-password', 'Please confirm your password');
+                hasErrors = true;
+            } else if (password !== confirmPassword) {
+                showFieldError('confirm-password', 'Passwords do not match');
+                hasErrors = true;
+            } else {
+                document.getElementById('confirm-password').classList.add('success');
+            }
+
+            if (hasErrors) {
+                return;
+            }
+
+            // Show loading state
+            const submitBtn = document.querySelector('.register-btn');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Creating Account...';
+            submitBtn.classList.add('loading');
+            this.classList.add('loading');
+
+            // Create user data object
+            const userData = {
+                name: name,
+                email: email,
+                password: password
+            };
+
+            // Use UserDatabase for registration
+            try {
+                console.log('Attempting to register user:', userData.email);
+                console.log('UserDatabase available:', typeof UserDatabase);
+                console.log('UserDatabase methods:', Object.keys(UserDatabase));
+                
+                // Check if UserDatabase is properly loaded
+                if (typeof UserDatabase === 'undefined') {
+                    throw new Error('UserDatabase is not loaded. Please refresh the page.');
+                }
+                
+                if (typeof UserDatabase.registerUser !== 'function') {
+                    throw new Error('UserDatabase.registerUser is not a function. Database may not be initialized properly.');
+                }
+                
+                // Register user using the new database system
+                const result = UserDatabase.registerUser(userData);
+                console.log('Registration result:', result);
+                
+                if (result.success) {
+                    // Registration successful
+                    console.log('Registration successful for:', result.user);
+                    
+                    // Set user as logged in
+                    localStorage.setItem('isLoggedIn', 'true');
+                    localStorage.setItem('currentUser', JSON.stringify(result.user));
+                    
+                    // Show success message
+                    showSuccessMessage('Registration successful! Welcome ' + result.user.name + '!');
+                    
+                    // Redirect after a short delay
+                    setTimeout(() => {
+                        window.location.href = 'profile.html';
+                    }, 1500);
+                    
+                } else {
+                    // Registration failed
+                    console.error('Registration failed:', result.error);
+                    
+                    // Show specific error
+                    if (result.error.includes('email')) {
+                        showFieldError('email', result.error);
+                    } else if (result.error.includes('password')) {
+                        showFieldError('password', result.error);
+                    } else if (result.error.includes('name')) {
+                        showFieldError('name', result.error);
+                    } else {
+                        showGeneralError(result.error);
+                    }
+                }
+                
+            } catch (error) {
+                console.error('Registration error:', error);
+                console.error('Error stack:', error.stack);
+                showGeneralError('Registration failed: ' + error.message);
+            } finally {
+                // Remove loading state
+                submitBtn.textContent = originalText;
+                submitBtn.classList.remove('loading');
+                this.classList.remove('loading');
+            }
+        });
+
+        // Helper function to show field-specific errors
+        function showFieldError(fieldId, message) {
+            const field = document.getElementById(fieldId);
+            const errorElement = document.getElementById(fieldId + '-error');
+            
+            field.classList.add('error');
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+        }
+
+        // Helper function to show general errors
+        function showGeneralError(message) {
+            alert('Registration Error: ' + message);
+        }
+
+        // Helper function to show success message
+        function showSuccessMessage(message) {
+            // Create success notification
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background-color: #22c55e;
+                color: white;
+                padding: 15px 20px;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                z-index: 1001;
+                font-weight: 500;
+                animation: slideIn 0.3s ease-out;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            // Add animation
+            const keyframes = `
+                @keyframes slideIn {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+            `;
+            const styleSheet = document.createElement('style');
+            styleSheet.textContent = keyframes;
+            document.head.appendChild(styleSheet);
+
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.remove();
+                styleSheet.remove();
+            }, 3000);
+        }
+
+        // Check UserDatabase status on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('UserDatabase status:', UserDatabase.getStats());
+            
+            // Add debug button to test registration system
+            const debugContainer = document.createElement('div');
+            debugContainer.style.cssText = `
+                position: fixed;
+                top: 10px;
+                left: 10px;
+                background: #f8f9fa;
+                border: 1px solid #e9ecef;
+                border-radius: 8px;
+                padding: 10px;
+                font-size: 12px;
+                z-index: 1000;
+                max-width: 250px;
+            `;
+            debugContainer.innerHTML = `
+                <h4 style="margin: 0 0 10px 0; color: #495057;">Debug Panel</h4>
+                <button onclick="testRegistration()" style="margin-bottom: 5px; padding: 5px 10px; font-size: 11px; border-radius: 4px; border: 1px solid #007bff; background: white; color: #007bff; cursor: pointer;">Test Registration</button><br>
+                <button onclick="checkDatabase()" style="margin-bottom: 5px; padding: 5px 10px; font-size: 11px; border-radius: 4px; border: 1px solid #28a745; background: white; color: #28a745; cursor: pointer;">Check Database</button><br>
+                <button onclick="clearLocalStorage()" style="padding: 5px 10px; font-size: 11px; border-radius: 4px; border: 1px solid #dc3545; background: white; color: #dc3545; cursor: pointer;">Clear Storage</button>
+            `;
+            document.body.appendChild(debugContainer);
+        });
+        
+        // Debug functions
+        function testRegistration() {
+            const testData = {
+                name: 'Test User',
+                email: 'test@example.com',
+                password: 'test123'
+            };
+            
+            console.log('Testing registration with:', testData);
+            const result = UserDatabase.registerUser(testData);
+            console.log('Registration result:', result);
+            alert('Registration test result: ' + (result.success ? 'SUCCESS' : 'FAILED: ' + result.error));
+        }
+        
+        function checkDatabase() {
+            const users = UserDatabase.getAllUsers();
+            const stats = UserDatabase.getStats();
+            console.log('All users:', users);
+            console.log('Database stats:', stats);
+            alert(`Database Stats:\nTotal Users: ${stats.totalUsers}\nDemo Users: ${stats.demoUsers}\nRegistered Users: ${stats.registeredUsers}\nUsers with Profiles: ${stats.usersWithProfiles}`);
+        }
+        
+        function clearLocalStorage() {
+            if (confirm('Clear all localStorage data? This will remove all users.')) {
+                localStorage.clear();
+                location.reload();
+            }
+        }
+    </script>
+</body>
+</html> 

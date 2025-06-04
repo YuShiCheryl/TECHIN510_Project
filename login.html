@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - StudySync</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .login-container {
+            max-width: 480px;
+            margin: 40px auto;
+            padding: 40px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--primary);
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .form-group input {
+            padding: 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        .login-btn {
+            background: var(--primary);
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .login-btn:hover {
+            background: var(--primary-light);
+        }
+
+        .register-link {
+            text-align: center;
+            margin-top: 20px;
+            color: var(--gray);
+        }
+
+        .register-link a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: #ef4444;
+            font-size: 14px;
+            margin-top: 4px;
+            display: none;
+        }
+        
+        .demo-btn {
+            background: #f8fafc;
+            color: var(--primary);
+            padding: 10px 16px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            flex: 1;
+        }
+        
+        .demo-btn:hover {
+            background: #f1f5f9;
+            border-color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <!-- Background decorative shapes -->
+    <div class="bg-shape bg-shape-1"></div>
+    <div class="bg-shape bg-shape-2"></div>
+    <div class="bg-shape bg-shape-3"></div>
+
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <span>✱</span>
+                </div>
+                <div class="logo-text">StudySync</div>
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="login-container">
+                <h2 class="login-title">Welcome Back</h2>
+                <form id="login-form" class="login-form">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" autocomplete="off" required>
+                        <span class="error-message" id="email-error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" autocomplete="new-password" required>
+                        <span class="error-message" id="password-error"></span>
+                    </div>
+                    <button type="submit" class="login-btn">Log In</button>
+                </form>
+                
+                <div style="margin: 20px 0; text-align: center; color: var(--gray); font-size: 14px;">
+                    <span>— OR —</span>
+                </div>
+                
+                <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                    <button type="button" class="demo-btn" onclick="fillDemoUser()">
+                        Demo User 1
+                    </button>
+                    <button type="button" class="demo-btn" onclick="fillCustomDemo()">
+                        Use My Email
+                    </button>
+                </div>
+                
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <button type="button" class="demo-btn" onclick="quickDemoLogin()" style="background: var(--primary); color: white; width: 200px;">
+                        🚀 Quick Demo Login
+                    </button>
+                </div>
+                
+                <div style="border-top: 1px solid #e2e8f0; padding-top: 20px; margin-top: 20px;">
+                    <h4 style="margin-bottom: 10px; color: var(--gray); font-size: 0.9rem;">🔧 Debug Info:</h4>
+                    <button type="button" class="demo-btn" onclick="showAllUsers()" style="width: 100%; background: #f1f5f9; color: var(--gray);">
+                        View All Registered Users
+                    </button>
+                </div>
+                
+                <p class="register-link">
+                    Don't have an account? <a href="register.html">Sign up</a>
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/auth.js"></script>
+    <script src="js/user-database.js"></script>
+    <script>
+        // Simple demo login using UserDatabase
+        function performLogin(email, password) {
+            console.log('Attempting login with:', email);
+            
+            // Use UserDatabase for authentication
+            const result = UserDatabase.loginUser(email, password);
+            
+            if (result.success) {
+                // Set login state in localStorage
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('currentUser', JSON.stringify(result.user));
+                
+                console.log('Login successful for:', result.user);
+                
+                // Show success message and redirect
+                alert('Login successful! Welcome ' + result.user.name);
+                window.location.href = 'index.html';
+            } else {
+                console.error('Login failed:', result.error);
+                throw new Error(result.error);
+            }
+        }
+        
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Reset error messages
+            document.querySelectorAll('.error-message').forEach(msg => {
+                msg.style.display = 'none';
+            });
+
+            // Get form data
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            // Validate basic input
+            if (!email || !password) {
+                alert('Please enter both email and password');
+                return;
+            }
+
+            // Perform simple demo login
+            try {
+                performLogin(email, password);
+            } catch (error) {
+                console.error('Login error:', error);
+                alert('Login failed. Please try again.');
+            }
+        });
+        
+        // Demo user functions
+        function fillDemoUser() {
+            document.getElementById('email').value = 'demo@studysync.com';
+            document.getElementById('password').value = 'StudySync2024!';
+        }
+        
+        function fillCustomDemo() {
+            const email = prompt('Enter your email address:');
+            if (email) {
+                document.getElementById('email').value = email;
+                document.getElementById('password').value = 'StudySync2024!';
+            }
+        }
+        
+        // Quick demo login - bypasses form entirely
+        function quickDemoLogin() {
+            console.log('Quick demo login starting...');
+            performLogin('demo@studysync.com', 'StudySync2024!');
+        }
+        
+        // Debug function to show all registered users
+        function showAllUsers() {
+            const users = UserDatabase.getAllUsers();
+            let userList = 'Registered Users:\n\n';
+            
+            if (users.length === 0) {
+                userList += 'No users found.\n';
+            } else {
+                users.forEach((user, index) => {
+                    userList += `${index + 1}. ${user.name}\n`;
+                    userList += `   Email: ${user.email}\n`;
+                    userList += `   Password: ${user.password}\n`;
+                    userList += `   Registered: ${new Date(user.registeredAt).toLocaleDateString()}\n\n`;
+                });
+            }
+            
+            userList += '\n💡 Tip: You can use "StudySync2024!" as password for any account\n';
+            userList += 'Or use the exact password shown above for each user.';
+            
+            alert(userList);
+        }
+    </script>
+</body>
+</html> 

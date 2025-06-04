@@ -1,0 +1,2321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - StudySync</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #8b5cf6;
+            --primary-light: #a78bfa;
+            --secondary: #f472b6;
+            --secondary-light: #f9a8d4;
+            --tertiary: #facc15;
+            --success: #22c55e;
+            --dark: #1f2937;
+            --light: #f3f4f6;
+            --gray: #6b7280;
+            --border-radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark);
+            background-color: #f0f9ff;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, .logo-text {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Background shapes */
+        .bg-shape {
+            position: fixed;
+            z-index: -1;
+            border-radius: 50%;
+            opacity: 0.1;
+        }
+
+        .bg-shape-1 {
+            top: -250px;
+            right: -150px;
+            width: 500px;
+            height: 500px;
+            background-color: var(--primary);
+        }
+
+        .bg-shape-2 {
+            bottom: -300px;
+            left: -200px;
+            width: 600px;
+            height: 600px;
+            background-color: var(--secondary);
+        }
+
+        .bg-shape-3 {
+            top: 40%;
+            left: 45%;
+            width: 300px;
+            height: 300px;
+            background-color: var(--tertiary);
+            opacity: 0.05;
+        }
+
+        /* Small decorative elements */
+        .small-shape {
+            position: fixed;
+            z-index: -1;
+            opacity: 0.2;
+        }
+
+        .asterisk {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        .circle {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--secondary);
+        }
+
+        .squiggle {
+            width: 50px;
+            height: 20px;
+        }
+
+        /* Header styles */
+        header {
+            background-color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--dark);
+        }
+
+        .logo-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            background-color: var(--primary);
+            border-radius: 8px;
+            margin-right: 10px;
+            color: white;
+            font-size: 18px;
+        }
+
+        .logo-text {
+            font-size: 22px;
+            font-weight: 500;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-item {
+            margin: 0 15px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 5px 0;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary);
+        }
+
+        .nav-link.active {
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .search-icon, .notification-icon {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+
+        .search-icon:hover, .notification-icon:hover {
+            background-color: var(--light);
+            color: var(--primary);
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid var(--light);
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 25px;
+            background-color: #f8fafc;
+            min-height: calc(100vh - 65px);
+        }
+
+        .welcome-header {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .welcome-card {
+            background-color: #56c4c5;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .welcome-text h2 {
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+
+        .welcome-text p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .welcome-image {
+            width: 120px;
+            height: 120px;
+            overflow: hidden;
+        }
+
+        .welcome-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .stats-card {
+            background-color: #818cf8;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            color: white;
+        }
+
+        .stats-header {
+            margin-bottom: 15px;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .stat-label {
+            width: 100px;
+            font-size: 0.9rem;
+        }
+
+        .stat-bar {
+            flex: 1;
+            height: 8px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .stat-progress {
+            position: absolute;
+            height: 100%;
+            background-color: white;
+            border-radius: 4px;
+        }
+
+        .stat-value {
+            width: 40px;
+            text-align: right;
+            font-size: 0.9rem;
+            margin-left: 10px;
+        }
+
+        .quicklinks {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .quicklink-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .quicklink-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .quicklink-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+
+        .quicklink-icon.blue {
+            background-color: #e0f2fe;
+            color: #0ea5e9;
+        }
+
+        .quicklink-icon.purple {
+            background-color: #f3e8ff;
+            color: #a855f7;
+        }
+
+        .quicklink-icon.yellow {
+            background-color: #fef9c3;
+            color: #eab308;
+        }
+
+        .quicklink-icon.green {
+            background-color: #d1fae5;
+            color: #15803d;
+        }
+
+        .quicklink-text {
+            font-weight: 500;
+        }
+
+        .calendar-section {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .calendar-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .calendar-days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            text-align: center;
+            font-weight: 500;
+            color: var(--gray);
+            margin-bottom: 10px;
+        }
+
+        .calendar-dates {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            grid-gap: 5px;
+        }
+
+        .date-cell {
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .date-cell:hover {
+            background-color: var(--light);
+        }
+
+        .date-cell.today {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .date-cell.has-event::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background-color: var(--secondary);
+        }
+
+        .date-cell.other-month {
+            color: #cbd5e1;
+        }
+
+        .date-cell.selected {
+            background-color: var(--secondary) !important;
+            color: white;
+            font-weight: 600;
+        }
+
+        .date-cell.selected.today {
+            background-color: var(--primary) !important;
+            box-shadow: 0 0 0 2px var(--secondary);
+        }
+
+        .appointment {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8fafc;
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--tertiary);
+            transition: all 0.3s ease;
+        }
+
+        .appointment.hidden {
+            display: none;
+        }
+
+        .appointment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .appointment-icon {
+            width: 30px;
+            height: 30px;
+            background-color: var(--tertiary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .appointment-details {
+            display: flex;
+            align-items: center;
+        }
+
+        .appointment-time {
+            background-color: #e2e8f0;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.85rem;
+            margin-right: 10px;
+        }
+
+        /* Profile Sidebar */
+        .profile-sidebar {
+            background-color: white;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            border-left: 1px solid #e2e8f0;
+        }
+
+        .profile-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e2e8f0;
+            margin-bottom: 20px;
+        }
+
+        .profile-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .profile-email {
+            color: var(--gray);
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+        }
+
+        .profile-stats {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .profile-stat {
+            text-align: center;
+            flex: 1;
+        }
+
+        .stat-value {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--gray);
+        }
+
+        .sidebar-section {
+            margin-bottom: 30px;
+        }
+
+        .sidebar-section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .sidebar-section-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .see-all {
+            color: var(--primary);
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+
+        .recent-results {
+            background-color: #f8fafc;
+            border-radius: var(--border-radius);
+            padding: 15px;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .recent-results p {
+            color: var(--gray);
+        }
+
+        .reminders-list {
+            list-style: none;
+        }
+
+        .reminder-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .reminder-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            background-color: #e0f2fe;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: #0ea5e9;
+        }
+
+        .reminder-details {
+            flex: 1;
+        }
+
+        .reminder-title {
+            font-weight: 500;
+            margin-bottom: 3px;
+        }
+
+        .reminder-date {
+            font-size: 0.75rem;
+            color: var(--gray);
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .page-button {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            background-color: #e2e8f0;
+            cursor: pointer;
+            margin: 0 5px;
+        }
+
+        .page-button.active {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .page-button.prev, .page-button.next {
+            background-color: white;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 0;
+            border-radius: var(--border-radius);
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            animation: modalFadeIn 0.3s ease-out;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-header {
+            padding: 25px;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .close {
+            color: var(--gray);
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .close:hover {
+            color: var(--primary);
+        }
+
+        .modal-body {
+            padding: 25px;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            margin-right: 8px;
+        }
+
+        .time-picker-grid {
+            display: grid;
+            grid-template-columns: 60px repeat(7, 1fr);
+            gap: 1px;
+            background-color: #e2e8f0;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .time-label {
+            background-color: #f8fafc;
+            color: var(--gray);
+            padding: 8px;
+            text-align: center;
+            font-size: 0.75rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .time-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .time-slot {
+            background-color: white;
+            padding: 8px;
+            text-align: center;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            min-height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .time-slot:hover {
+            background-color: #f8fafc;
+        }
+
+        .time-slot.selected {
+            background-color: var(--primary);
+            color: white;
+            font-weight: 500;
+        }
+
+        .time-slot.selected span {
+            opacity: 1 !important;
+        }
+
+        .time-slot.unavailable {
+            background-color: #f1f5f9;
+            color: var(--gray);
+            cursor: not-allowed;
+        }
+
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: #f8fafc;
+            color: var(--gray);
+            border: 1px solid #e2e8f0;
+        }
+
+        .btn-secondary:hover {
+            background-color: #f1f5f9;
+            color: var(--primary);
+        }
+
+        .modal-footer {
+            padding: 20px 25px;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .profile-status {
+            background-color: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 15px;
+        }
+
+        .profile-status.incomplete {
+            background-color: #fef7f2;
+            border-color: #fed7aa;
+        }
+
+        .status-text {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .status-text.incomplete {
+            color: #ea580c;
+        }
+
+        .completion-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .progress-bar {
+            flex: 1;
+            height: 6px;
+            background-color: #e2e8f0;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: var(--success);
+            transition: width 0.3s;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+            
+            .profile-sidebar {
+                border-left: none;
+                border-top: 1px solid #e2e8f0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .quicklinks {
+                grid-template-columns: 1fr;
+            }
+            
+            .welcome-header {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                width: 95%;
+                margin: 10px auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background decorative shapes -->
+    <div class="bg-shape bg-shape-1"></div>
+    <div class="bg-shape bg-shape-2"></div>
+    <div class="bg-shape bg-shape-3"></div>
+
+    <!-- Small decorative elements scattered throughout -->
+    <div class="small-shape asterisk" style="top: 20%; left: 10%;">✱</div>
+    <div class="small-shape asterisk" style="top: 50%; right: 15%;">✱</div>
+    <div class="small-shape asterisk" style="bottom: 30%; left: 20%;">✱</div>
+
+    <div class="small-shape circle" style="top: 25%; right: 25%;"></div>
+    <div class="small-shape circle" style="bottom: 15%; left: 40%;"></div>
+
+    <svg class="small-shape squiggle" style="top: 40%; left: 30%;" viewBox="0 0 50 20" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,10 Q12.5,0 25,10 T50,10" fill="none" stroke="#8b5cf6" stroke-width="2" />
+    </svg>
+
+    <svg class="small-shape squiggle" style="bottom: 20%; right: 10%;" viewBox="0 0 50 20" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,10 Q12.5,0 25,10 T50,10" fill="none" stroke="#f472b6" stroke-width="2" />
+    </svg>
+
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <span>✱</span>
+                </div>
+                <div class="logo-text">StudySync</div>
+            </a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="profile.html" class="nav-link active">Profile</a></li>
+                <li class="nav-item"><a href="matches.html" class="nav-link">Matches</a></li>
+            </ul>
+            <div class="user-profile">
+                <button class="search-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                </button>
+                <button class="notification-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                </button>
+                <div class="avatar">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'%3E%3Ccircle cx='25' cy='25' r='25' fill='%23f3f4f6'/%3E%3Ccircle cx='25' cy='20' r='8' fill='%236b7280'/%3E%3Cpath d='M25,50 C34,50 40,42 40,33 C40,33 37,28 25,28 C13,28 10,33 10,33 C10,42 16,50 25,50 Z' fill='%236b7280'/%3E%3C/svg%3E" alt="User Avatar">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="dashboard" style="grid-template-columns: 1fr 350px;">
+        <!-- Main Content Area -->
+        <div class="main-content" style="grid-column: 1 / span 2;">
+            <div class="welcome-header">
+                <div class="welcome-card">
+                    <div class="welcome-text">
+                        <h2 id="welcomeMessage">Welcome back, Alex!</h2>
+                        <p>I hope you're well. How can I help you today?</p>
+                        <button class="btn" style="background-color: white; color: #56c4c5; padding: 8px 15px; border: none; border-radius: 8px; font-weight: 500; margin-top: 10px; cursor: pointer;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 5px; position: relative; top: 2px;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                            Ask me
+                        </button>
+                    </div>
+                    <div class="welcome-image">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='100' fill='%23f3f4f6'/%3E%3Ccircle cx='100' cy='85' r='30' fill='%236b7280'/%3E%3Cpath d='M100,200 C134,200 150,170 150,140 C150,140 130,120 100,120 C70,120 50,140 50,140 C50,170 66,200 100,200 Z' fill='%236b7280'/%3E%3C/svg%3E" alt="Welcome Illustration">
+                    </div>
+                </div>
+
+                <div class="stats-card">
+                    <div class="stats-header">
+                        <h3>Study Progress</h3>
+                        <p>Track your performance and improvements</p>
+                    </div>
+                    <div id="studyProgressContent">
+                        <div class="stat-item">
+                            <div class="stat-label">CS301</div>
+                            <div class="stat-bar">
+                                <div class="stat-progress" style="width: 87%"></div>
+                            </div>
+                            <div class="stat-value">87%</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">CS315</div>
+                            <div class="stat-bar">
+                                <div class="stat-progress" style="width: 65%"></div>
+                            </div>
+                            <div class="stat-value">65%</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">MATH240</div>
+                            <div class="stat-bar">
+                                <div class="stat-progress" style="width: 92%"></div>
+                            </div>
+                            <div class="stat-value">92%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile Completion Status -->
+            <div id="profileStatus" class="profile-status incomplete">
+                <div class="status-text incomplete">Complete your profile to find better study matches</div>
+                <div class="completion-indicator">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill" style="width: 25%;"></div>
+                    </div>
+                    <span id="progressText">1/4 Complete</span>
+                </div>
+            </div>
+
+            <div class="quicklinks">
+                <div class="quicklink-card" onclick="openModal('academicModal')">
+                    <div class="quicklink-icon blue">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                    </div>
+                    <div class="quicklink-text">Academic Info</div>
+                    <div id="academicStatus" class="status-indicator" style="margin-left: auto; width: 8px; height: 8px; border-radius: 50%; background-color: #ef4444;"></div>
+                </div>
+                <div class="quicklink-card" onclick="openModal('preferencesModal')">
+                    <div class="quicklink-icon purple">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5a5.5 5.5 0 0 1 3.096 10.047 9 9 0 0 1 5.9 8.181.75.75 0 1 1-1.499.044 7.5 7.5 0 0 0-14.993 0 .75.75 0 0 1-1.5-.045 9 9 0 0 1 5.9-8.18A5.5 5.5 0 0 1 12 2.5ZM8 8a4 4 0 1 0 8 0 4 4 0 0 0-8 0Z"></path></svg>
+                    </div>
+                    <div class="quicklink-text">Study Preferences</div>
+                    <div id="preferencesStatus" class="status-indicator" style="margin-left: auto; width: 8px; height: 8px; border-radius: 50%; background-color: #ef4444;"></div>
+                </div>
+                <div class="quicklink-card" onclick="openModal('availabilityModal')">
+                    <div class="quicklink-icon yellow">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    </div>
+                    <div class="quicklink-text">Availability</div>
+                    <div id="availabilityStatus" class="status-indicator" style="margin-left: auto; width: 8px; height: 8px; border-radius: 50%; background-color: #ef4444;"></div>
+                </div>
+                <div class="quicklink-card" onclick="openModal('studyProgressModal')">
+                    <div class="quicklink-icon green">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path></svg>
+                    </div>
+                    <div class="quicklink-text">Study Progress</div>
+                    <div id="studyProgressStatus" class="status-indicator" style="margin-left: auto; width: 8px; height: 8px; border-radius: 50%; background-color: #ef4444;"></div>
+                </div>
+            </div>
+
+            <div class="calendar-section">
+                <div class="calendar-header">
+                    <h3 class="calendar-title" id="calendarTitle">Loading...</h3>
+                    <div class="calendar-nav">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="cursor: pointer;" onclick="previousMonth()"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="cursor: pointer; margin-left: 15px;" onclick="nextMonth()"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </div>
+                </div>
+
+                <div class="calendar-days">
+                    <div>MON</div>
+                    <div>TUE</div>
+                    <div>WED</div>
+                    <div>THU</div>
+                    <div>FRI</div>
+                    <div>SAT</div>
+                    <div>SUN</div>
+                </div>
+
+                <div class="calendar-dates" id="calendarDates">
+                    <!-- Calendar dates will be generated by JavaScript -->
+                </div>
+
+                <div style="text-align: center; margin: 15px 0; padding: 10px; border-top: 1px solid #e2e8f0;">
+                    <button class="btn" id="addEventBtn" onclick="addQuickEvent()" style="padding: 8px 16px; font-size: 0.9rem;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                        Add Today's Event
+                    </button>
+                </div>
+
+                <div class="appointment" id="todayAppointment" style="display: none;">
+                    <div class="appointment-header">
+                        <h4>Today's Study Sessions</h4>
+                        <div class="appointment-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                        </div>
+                    </div>
+                    <div class="appointment-details" id="appointmentDetails">
+                        <div class="appointment-time">13:30 - 15:00</div>
+                        <div>CS315: AI Project Group Meeting</div>
+                    </div>
+                </div>
+
+                <div class="appointment" id="selectedDateAppointment" style="display: none;">
+                    <div class="appointment-header">
+                        <h4 id="selectedDateTitle">Selected Date</h4>
+                        <div class="appointment-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        </div>
+                    </div>
+                    <div class="appointment-details" id="selectedDateDetails">
+                        <div style="color: var(--gray); font-style: italic;">No events scheduled</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="profile-sidebar">
+        <div class="profile-header">
+            <div class="profile-avatar">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'%3E%3Ccircle cx='25' cy='25' r='25' fill='%23f3f4f6'/%3E%3Ccircle cx='25' cy='20' r='8' fill='%236b7280'/%3E%3Cpath d='M25,50 C34,50 40,42 40,33 C40,33 37,28 25,28 C13,28 10,33 10,33 C10,42 16,50 25,50 Z' fill='%236b7280'/%3E%3C/svg%3E" alt="Profile Avatar">
+            </div>
+            <div class="profile-name" id="profileName">Demo User</div>
+            <div class="profile-email" id="profileEmail">demo@studysync.com</div>
+            <div class="profile-stats">
+                <div class="profile-stat">
+                    <div class="stat-value">15</div>
+                    <div class="stat-label">Study Hours</div>
+                </div>
+                <div class="profile-stat">
+                    <div class="stat-value">8</div>
+                    <div class="stat-label">Matches</div>
+                </div>
+                <div class="profile-stat">
+                    <div class="stat-value">3</div>
+                    <div class="stat-label">Groups</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar-section">
+            <div class="sidebar-section-header">
+                <div class="sidebar-section-title">Recent Study Results</div>
+                <div class="see-all">See all</div>
+            </div>
+            <div class="recent-results">
+                <p><strong>CS315 Quiz:</strong> 92% - Great improvement in algorithm analysis!</p>
+            </div>
+            <div class="recent-results">
+                <p><strong>MATH240 Exam:</strong> 88% - Strong performance in linear algebra concepts.</p>
+            </div>
+        </div>
+
+        <div class="sidebar-section">
+            <div class="sidebar-section-header">
+                <div class="sidebar-section-title">Upcoming Reminders</div>
+                <div class="see-all">See all</div>
+            </div>
+            <ul class="reminders-list">
+                <li class="reminder-item">
+                    <div class="reminder-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+                    </div>
+                    <div class="reminder-details">
+                        <div class="reminder-title">CS315 Project Due</div>
+                        <div class="reminder-date">Dec 28, 2024</div>
+                    </div>
+                </li>
+                <li class="reminder-item">
+                    <div class="reminder-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    </div>
+                    <div class="reminder-details">
+                        <div class="reminder-title">Study Group Meeting</div>
+                        <div class="reminder-date">Tomorrow, 2:00 PM</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Academic Info Modal -->
+    <div id="academicModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Academic Information</h2>
+                <span class="close" onclick="closeModal('academicModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="academicForm">
+                    <div class="form-group">
+                        <label class="form-label">Major *</label>
+                        <select id="major" class="form-select">
+                            <option value="">Select your major</option>
+                            <option value="Computer Science">Computer Science</option>
+                            <option value="Mathematics">Mathematics</option>
+                            <option value="Engineering">Engineering</option>
+                            <option value="Business">Business</option>
+                            <option value="Biology">Biology</option>
+                            <option value="Chemistry">Chemistry</option>
+                            <option value="Physics">Physics</option>
+                            <option value="Psychology">Psychology</option>
+                            <option value="English">English</option>
+                            <option value="History">History</option>
+                            <option value="Economics">Economics</option>
+                            <option value="Art">Art</option>
+                            <option value="Music">Music</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Academic Year *</label>
+                        <select id="year" class="form-select">
+                            <option value="">Select your year</option>
+                            <option value="Freshman">Freshman (1st Year)</option>
+                            <option value="Sophomore">Sophomore (2nd Year)</option>
+                            <option value="Junior">Junior (3rd Year)</option>
+                            <option value="Senior">Senior (4th Year)</option>
+                            <option value="Graduate">Graduate Student</option>
+                            <option value="PhD">PhD Student</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Current Courses</label>
+                        <textarea id="courses" class="form-textarea" placeholder="List your current courses (e.g., CS301, MATH240, ENG102)"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">GPA</label>
+                        <input type="number" id="gpa" class="form-input" min="0" max="4" step="0.01" placeholder="3.50">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Academic Goals</label>
+                        <textarea id="goals" class="form-textarea" placeholder="Describe your academic goals and interests"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeModal('academicModal')">Cancel</button>
+                <button type="button" class="btn" onclick="saveAcademicInfo()">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Study Preferences Modal -->
+    <div id="preferencesModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Study Preferences</h2>
+                <span class="close" onclick="closeModal('preferencesModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="preferencesForm">
+                    <div class="form-group">
+                        <label class="form-label">Learning Style</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="visual" value="visual">
+                                <label for="visual">Visual Learner</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="auditory" value="auditory">
+                                <label for="auditory">Auditory Learner</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="kinesthetic" value="kinesthetic">
+                                <label for="kinesthetic">Kinesthetic Learner</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="reading" value="reading">
+                                <label for="reading">Reading/Writing</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Study Environment</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="library" value="library">
+                                <label for="library">Library</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="cafe" value="cafe">
+                                <label for="cafe">Coffee Shop/Cafe</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="outdoors" value="outdoors">
+                                <label for="outdoors">Outdoors</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="home" value="home">
+                                <label for="home">Home/Dorm</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="study-room" value="study-room">
+                                <label for="study-room">Study Rooms</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Study Methods</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="flashcards" value="flashcards">
+                                <label for="flashcards">Flashcards</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="discussion" value="discussion">
+                                <label for="discussion">Group Discussion</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="practice-problems" value="practice-problems">
+                                <label for="practice-problems">Practice Problems</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="note-taking" value="note-taking">
+                                <label for="note-taking">Note Taking</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="teaching" value="teaching">
+                                <label for="teaching">Teaching Others</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Personality Traits</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="introvert" value="introvert">
+                                <label for="introvert">Introvert</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="extrovert" value="extrovert">
+                                <label for="extrovert">Extrovert</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="organized" value="organized">
+                                <label for="organized">Highly Organized</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="flexible" value="flexible">
+                                <label for="flexible">Flexible</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="competitive" value="competitive">
+                                <label for="competitive">Competitive</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="collaborative" value="collaborative">
+                                <label for="collaborative">Collaborative</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Study Session Duration Preference</label>
+                        <select id="sessionDuration" class="form-select">
+                            <option value="">Select duration</option>
+                            <option value="30-60">30-60 minutes</option>
+                            <option value="60-90">60-90 minutes</option>
+                            <option value="90-120">90-120 minutes</option>
+                            <option value="120+">2+ hours</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeModal('preferencesModal')">Cancel</button>
+                <button type="button" class="btn" onclick="savePreferences()">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Availability Modal -->
+    <div id="availabilityModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Study Availability</h2>
+                <span class="close" onclick="closeModal('availabilityModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="availabilityForm">
+                    <div class="form-group">
+                        <label class="form-label">Select your available time slots</label>
+                        <p style="font-size: 0.9rem; color: var(--gray); margin-bottom: 15px;">
+                            Click on time slots to mark them as available. Green slots indicate your availability.
+                        </p>
+                        <div class="time-picker-grid" id="timeSlots">
+                            <!-- Time slots will be generated by JavaScript -->
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Preferred Location</label>
+                        <select id="location" class="form-select">
+                            <option value="">Select preferred location</option>
+                            <option value="on-campus">On Campus</option>
+                            <option value="library">University Library</option>
+                            <option value="student-center">Student Center</option>
+                            <option value="coffee-shops">Coffee Shops near campus</option>
+                            <option value="online">Online/Virtual</option>
+                            <option value="flexible">Flexible</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Additional Notes</label>
+                        <textarea id="availabilityNotes" class="form-textarea" placeholder="Any additional information about your availability or preferences"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeModal('availabilityModal')">Cancel</button>
+                <button type="button" class="btn" onclick="saveAvailability()">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Study Progress Modal -->
+    <div id="studyProgressModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Study Progress & Goals</h2>
+                <span class="close" onclick="closeModal('studyProgressModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="studyProgressForm">
+                    <div class="form-group">
+                        <label class="form-label">Study Goals</label>
+                        <textarea id="studyGoals" class="form-textarea" placeholder="What are your main study goals for this semester? (e.g., Improve grades, learn new skills, prepare for exams)"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Target GPA</label>
+                        <input type="number" id="targetGPA" class="form-input" min="0" max="4" step="0.01" placeholder="3.50">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Study Hours per Week</label>
+                        <select id="weeklyHours" class="form-select">
+                            <option value="">Select target hours</option>
+                            <option value="5-10">5-10 hours</option>
+                            <option value="10-15">10-15 hours</option>
+                            <option value="15-20">15-20 hours</option>
+                            <option value="20-25">20-25 hours</option>
+                            <option value="25+">25+ hours</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Preferred Study Methods</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="individual-study" value="individual">
+                                <label for="individual-study">Individual Study</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="group-study" value="group">
+                                <label for="group-study">Group Study</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="tutoring" value="tutoring">
+                                <label for="tutoring">Tutoring Sessions</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="peer-review" value="peer-review">
+                                <label for="peer-review">Peer Review</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Progress Notes</label>
+                        <textarea id="progressNotes" class="form-textarea" placeholder="Track your progress, challenges, and achievements"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeModal('studyProgressModal')">Cancel</button>
+                <button type="button" class="btn" onclick="saveStudyProgress()">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script>
+        // Profile completion tracking
+        let profileCompletion = {
+            academic: false,
+            preferences: false,
+            availability: false,
+            studyProgress: false
+        };
+
+        // Store profile data
+        let profileData = {
+            academic: {},
+            preferences: {},
+            availability: {},
+            studyProgress: {}
+        };
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            checkForNewUser();
+            loadProfileData();
+            generateTimeSlots();
+            updateProfileStatus();
+            loadUserData();
+            updateStudyProgress();
+            initializeCalendar();
+        });
+
+        // Check if this is a new user and clear any existing profile data
+        function checkForNewUser() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+            
+            if (currentUser) {
+                // Check if this user is a new registered user (not a demo user)
+                if (!currentUser.id.startsWith('demo_')) {
+                    // Check if they have profile data that doesn't match their user ID
+                    const existingProfile = localStorage.getItem('studysync_profile');
+                    const existingCompletion = localStorage.getItem('studysync_completion');
+                    
+                    // For new users, clear any existing profile data to ensure fresh start
+                    if (existingProfile || existingCompletion) {
+                        console.log('Clearing existing profile data for new user:', currentUser.email);
+                        localStorage.removeItem('studysync_profile');
+                        localStorage.removeItem('studysync_completion');
+                        
+                        // Reset profile data to empty state
+                        profileData = {
+                            academic: {},
+                            preferences: {},
+                            availability: {},
+                            studyProgress: {}
+                        };
+                        
+                        profileCompletion = {
+                            academic: false,
+                            preferences: false,
+                            availability: false,
+                            studyProgress: false
+                        };
+                    }
+                }
+            }
+        }
+
+        // Modal functions
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+            if (modalId === 'availabilityModal') {
+                generateTimeSlots();
+            }
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+
+        // Save Academic Info
+        function saveAcademicInfo() {
+            const major = document.getElementById('major').value;
+            const year = document.getElementById('year').value;
+            const courses = document.getElementById('courses').value;
+            const gpa = document.getElementById('gpa').value;
+            const goals = document.getElementById('goals').value;
+
+            if (!major || !year) {
+                alert('Please fill in required fields (Major and Year)');
+                return;
+            }
+
+            profileData.academic = { major, year, courses, gpa, goals };
+            profileCompletion.academic = true;
+            
+            // Save to localStorage
+            localStorage.setItem('studysync_profile', JSON.stringify(profileData));
+            localStorage.setItem('studysync_completion', JSON.stringify(profileCompletion));
+            
+            updateProfileStatus();
+            updateStudyProgress();
+            closeModal('academicModal');
+
+            // Show success message
+            showSuccessMessage('Academic information saved successfully!');
+        }
+
+        // Save Study Preferences
+        function savePreferences() {
+            const learningStyles = getCheckedValues('visual', 'auditory', 'kinesthetic', 'reading');
+            const environments = getCheckedValues('library', 'cafe', 'outdoors', 'home', 'study-room');
+            const methods = getCheckedValues('flashcards', 'discussion', 'practice-problems', 'note-taking', 'teaching');
+            const personality = getCheckedValues('introvert', 'extrovert', 'organized', 'flexible', 'competitive', 'collaborative');
+            const sessionDuration = document.getElementById('sessionDuration').value;
+
+            if (learningStyles.length === 0 || environments.length === 0) {
+                alert('Please select at least one learning style and environment');
+                return;
+            }
+
+            profileData.preferences = { learningStyles, environments, methods, personality, sessionDuration };
+            profileCompletion.preferences = true;
+            
+            // Save to localStorage
+            localStorage.setItem('studysync_profile', JSON.stringify(profileData));
+            localStorage.setItem('studysync_completion', JSON.stringify(profileCompletion));
+            
+            updateProfileStatus();
+            closeModal('preferencesModal');
+
+            // Show success message
+            showSuccessMessage('Study preferences saved successfully!');
+        }
+
+        // Save Availability
+        function saveAvailability() {
+            const selectedSlots = getSelectedTimeSlots();
+            const location = document.getElementById('location').value;
+            const notes = document.getElementById('availabilityNotes').value;
+
+            if (selectedSlots.length === 0 || !location) {
+                alert('Please select at least one time slot and preferred location');
+                return;
+            }
+
+            profileData.availability = { timeSlots: selectedSlots, location, notes };
+            profileCompletion.availability = true;
+            
+            // Save to localStorage
+            localStorage.setItem('studysync_profile', JSON.stringify(profileData));
+            localStorage.setItem('studysync_completion', JSON.stringify(profileCompletion));
+            
+            updateProfileStatus();
+            closeModal('availabilityModal');
+
+            // Show success message
+            showSuccessMessage('Availability saved successfully!');
+        }
+
+        // Save Study Progress
+        function saveStudyProgress() {
+            const studyGoals = document.getElementById('studyGoals').value;
+            const targetGPA = document.getElementById('targetGPA').value;
+            const weeklyHours = document.getElementById('weeklyHours').value;
+            const studyMethods = getCheckedValues('individual-study', 'group-study', 'tutoring', 'peer-review');
+            const progressNotes = document.getElementById('progressNotes').value;
+
+            if (!studyGoals || !weeklyHours) {
+                alert('Please fill in your study goals and target weekly hours');
+                return;
+            }
+
+            profileData.studyProgress = { studyGoals, targetGPA, weeklyHours, studyMethods, progressNotes };
+            profileCompletion.studyProgress = true;
+            
+            // Save to localStorage
+            localStorage.setItem('studysync_profile', JSON.stringify(profileData));
+            localStorage.setItem('studysync_completion', JSON.stringify(profileCompletion));
+            
+            updateProfileStatus();
+            updateStudyProgress();
+            closeModal('studyProgressModal');
+
+            // Show success message
+            showSuccessMessage('Study progress goals saved successfully!');
+        }
+
+        // Helper function to get checked checkbox values
+        function getCheckedValues(...ids) {
+            return ids.filter(id => document.getElementById(id).checked);
+        }
+
+        // Generate time slots for availability picker
+        function generateTimeSlots() {
+            const timeSlotsContainer = document.getElementById('timeSlots');
+            if (!timeSlotsContainer) return;
+
+            const times = ['8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00'];
+            const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+
+            // Clear existing content
+            timeSlotsContainer.innerHTML = '';
+
+            // Add headers
+            const emptyCorner = document.createElement('div');
+            emptyCorner.className = 'time-label';
+            timeSlotsContainer.appendChild(emptyCorner);
+
+            days.forEach(day => {
+                const header = document.createElement('div');
+                header.className = 'time-header';
+                header.textContent = day.charAt(0).toUpperCase() + day.slice(1);
+                timeSlotsContainer.appendChild(header);
+            });
+
+            // Add time slots for each hour
+            times.forEach(time => {
+                // Add time label
+                const timeLabel = document.createElement('div');
+                timeLabel.className = 'time-label';
+                timeLabel.textContent = time;
+                timeSlotsContainer.appendChild(timeLabel);
+
+                // Add slots for each day
+                days.forEach(day => {
+                    const slot = document.createElement('div');
+                    slot.className = 'time-slot';
+                    slot.dataset.day = day;
+                    slot.dataset.time = time;
+                    slot.dataset.id = `${day}-${time}`;
+                    slot.onclick = () => toggleTimeSlot(slot);
+                    
+                    // Add an invisible span for accessibility
+                    const span = document.createElement('span');
+                    span.style.opacity = '0';
+                    span.textContent = '✓';
+                    slot.appendChild(span);
+                    
+                    timeSlotsContainer.appendChild(slot);
+                });
+            });
+        }
+
+        // Toggle time slot selection
+        function toggleTimeSlot(slot) {
+            slot.classList.toggle('selected');
+            const span = slot.querySelector('span');
+            if (span) {
+                span.style.opacity = slot.classList.contains('selected') ? '1' : '0';
+            }
+        }
+
+        // Get selected time slots
+        function getSelectedTimeSlots() {
+            const selected = document.querySelectorAll('.time-slot.selected');
+            return Array.from(selected).map(slot => ({
+                day: slot.dataset.day,
+                time: slot.dataset.time
+            }));
+        }
+
+        // Update profile completion status
+        function updateProfileStatus() {
+            const completed = Object.values(profileCompletion).filter(Boolean).length;
+            const total = Object.keys(profileCompletion).length;
+            const percentage = (completed / total) * 100;
+
+            // Update progress bar
+            document.getElementById('progressFill').style.width = percentage + '%';
+            document.getElementById('progressText').textContent = `${completed}/${total} Complete`;
+
+            // Update status indicators
+            document.getElementById('academicStatus').style.backgroundColor = 
+                profileCompletion.academic ? '#22c55e' : '#ef4444';
+            document.getElementById('preferencesStatus').style.backgroundColor = 
+                profileCompletion.preferences ? '#22c55e' : '#ef4444';
+            document.getElementById('availabilityStatus').style.backgroundColor = 
+                profileCompletion.availability ? '#22c55e' : '#ef4444';
+            document.getElementById('studyProgressStatus').style.backgroundColor = 
+                profileCompletion.studyProgress ? '#22c55e' : '#ef4444';
+
+            // Update main status
+            const statusElement = document.getElementById('profileStatus');
+            const statusText = statusElement.querySelector('.status-text');
+            
+            if (completed === total) {
+                statusElement.className = 'profile-status';
+                statusText.className = 'status-text';
+                statusText.textContent = 'Profile complete! You can now find study matches.';
+            } else {
+                statusElement.className = 'profile-status incomplete';
+                statusText.className = 'status-text incomplete';
+                statusText.textContent = 'Complete your profile to find better study matches';
+            }
+        }
+
+        // Load saved profile data
+        function loadProfileData() {
+            const savedProfile = localStorage.getItem('studysync_profile');
+            const savedCompletion = localStorage.getItem('studysync_completion');
+
+            if (savedProfile) {
+                profileData = JSON.parse(savedProfile);
+            }
+
+            if (savedCompletion) {
+                profileCompletion = JSON.parse(savedCompletion);
+            }
+
+            // Load academic info
+            if (profileData.academic) {
+                document.getElementById('major').value = profileData.academic.major || '';
+                document.getElementById('year').value = profileData.academic.year || '';
+                document.getElementById('courses').value = profileData.academic.courses || '';
+                document.getElementById('gpa').value = profileData.academic.gpa || '';
+                document.getElementById('goals').value = profileData.academic.goals || '';
+            }
+
+            // Load preferences
+            if (profileData.preferences) {
+                // Load learning styles
+                profileData.preferences.learningStyles?.forEach(style => {
+                    const checkbox = document.getElementById(style);
+                    if (checkbox) checkbox.checked = true;
+                });
+
+                // Load environments
+                profileData.preferences.environments?.forEach(env => {
+                    const checkbox = document.getElementById(env);
+                    if (checkbox) checkbox.checked = true;
+                });
+
+                // Load methods
+                profileData.preferences.methods?.forEach(method => {
+                    const checkbox = document.getElementById(method);
+                    if (checkbox) checkbox.checked = true;
+                });
+
+                // Load personality traits
+                profileData.preferences.personality?.forEach(trait => {
+                    const checkbox = document.getElementById(trait);
+                    if (checkbox) checkbox.checked = true;
+                });
+
+                document.getElementById('sessionDuration').value = profileData.preferences.sessionDuration || '';
+            }
+
+            // Load availability
+            if (profileData.availability) {
+                document.getElementById('location').value = profileData.availability.location || '';
+                document.getElementById('availabilityNotes').value = profileData.availability.notes || '';
+                
+                // Load time slots (after generation)
+                setTimeout(() => {
+                    profileData.availability.timeSlots?.forEach(slot => {
+                        const slotElement = document.querySelector(`[data-day="${slot.day}"][data-time="${slot.time}"]`);
+                        if (slotElement) {
+                            slotElement.classList.add('selected');
+                        }
+                    });
+                }, 100);
+            }
+
+            // Load study progress
+            if (profileData.studyProgress) {
+                document.getElementById('studyGoals').value = profileData.studyProgress.studyGoals || '';
+                document.getElementById('targetGPA').value = profileData.studyProgress.targetGPA || '';
+                document.getElementById('weeklyHours').value = profileData.studyProgress.weeklyHours || '';
+                document.getElementById('progressNotes').value = profileData.studyProgress.progressNotes || '';
+                
+                // Load study methods
+                profileData.studyProgress.studyMethods?.forEach(method => {
+                    const checkbox = document.getElementById(method + '-study') || document.getElementById(method);
+                    if (checkbox) checkbox.checked = true;
+                });
+            }
+        }
+
+        // Show success message
+        function showSuccessMessage(message) {
+            // Create success notification
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background-color: #22c55e;
+                color: white;
+                padding: 15px 20px;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                z-index: 1001;
+                font-weight: 500;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Export profile data for matching (this would be called by the matches page)
+        function getProfileDataForMatching() {
+            return {
+                ...profileData,
+                completion: profileCompletion
+            };
+        }
+
+        // Make function available globally for matches page
+        window.getProfileDataForMatching = getProfileDataForMatching;
+        
+        // Update study progress based on user's courses
+        function updateStudyProgress() {
+            const studyProgressContent = document.getElementById('studyProgressContent');
+            
+            // Check if user has academic info with courses
+            if (profileData.academic && profileData.academic.courses && profileData.academic.courses.trim()) {
+                // Parse courses from the textarea (comma or line separated)
+                const courses = profileData.academic.courses
+                    .split(/[,\n]/)
+                    .map(course => course.trim())
+                    .filter(course => course.length > 0);
+                
+                if (courses.length > 0) {
+                    // Show courses with 0% progress for new users
+                    let progressHTML = '';
+                    courses.slice(0, 3).forEach(course => { // Show max 3 courses
+                        progressHTML += `
+                            <div class="stat-item">
+                                <div class="stat-label">${course}</div>
+                                <div class="stat-bar">
+                                    <div class="stat-progress" style="width: 0%"></div>
+                                </div>
+                                <div class="stat-value">0%</div>
+                            </div>
+                        `;
+                    });
+                    studyProgressContent.innerHTML = progressHTML;
+                } else {
+                    // No courses parsed, show default message
+                    showNoCourses();
+                }
+            } else {
+                // No academic info yet
+                showNoCourses();
+            }
+            
+            function showNoCourses() {
+                studyProgressContent.innerHTML = `
+                    <div style="text-align: center; padding: 20px; color: var(--gray);">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 10px; opacity: 0.5;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+                        <p style="font-size: 0.9rem; margin-bottom: 10px;">No courses added yet</p>
+                        <button class="btn" onclick="openModal('academicModal')" style="padding: 8px 16px; font-size: 0.85rem;">
+                            Add Your Courses
+                        </button>
+                    </div>
+                `;
+            }
+        }
+        
+        // Load user data from localStorage
+        function loadUserData() {
+            // Try to get user data directly from localStorage first
+            let currentUser = null;
+            
+            try {
+                currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+            } catch (e) {
+                console.log('Error parsing current user:', e);
+            }
+            
+            // If no current user, try to get from registered user
+            if (!currentUser) {
+                try {
+                    currentUser = JSON.parse(localStorage.getItem('registeredUser') || 'null');
+                    if (currentUser) {
+                        // If we found a registered user, set them as current user
+                        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                        localStorage.setItem('isLoggedIn', 'true');
+                    }
+                } catch (e) {
+                    console.log('Error parsing registered user:', e);
+                }
+            }
+            
+            if (currentUser && currentUser.name && currentUser.email) {
+                // Update profile display with actual user data
+                console.log('Loading profile for user:', currentUser);
+                document.getElementById('profileName').textContent = currentUser.name;
+                document.getElementById('profileEmail').textContent = currentUser.email;
+                
+                // Update welcome message with user's name
+                const firstName = currentUser.name.split(' ')[0] || currentUser.name;
+                document.getElementById('welcomeMessage').textContent = `Welcome back, ${firstName}!`;
+            } else {
+                // Fallback to demo user for development
+                console.log('No user found, using demo user...');
+                const demoUser = {
+                    name: 'Demo User',
+                    email: 'demo@studysync.com',
+                    id: 'demo_user'
+                };
+                
+                // Set demo user as current user
+                localStorage.setItem('currentUser', JSON.stringify(demoUser));
+                localStorage.setItem('registeredUser', JSON.stringify(demoUser));
+                localStorage.setItem('isLoggedIn', 'true');
+                
+                document.getElementById('profileName').textContent = demoUser.name;
+                document.getElementById('profileEmail').textContent = demoUser.email;
+                document.getElementById('welcomeMessage').textContent = 'Welcome back, Demo User!';
+            }
+        }
+
+        // Calendar functionality
+        let currentDate = new Date();
+        let selectedDate = null;
+
+        // Sample events data (you can expand this)
+        const sampleEvents = {
+            // Format: 'YYYY-MM-DD': [events]
+            '2024-12-21': [
+                { time: '13:30 - 15:00', title: 'CS315: AI Project Group Meeting' }
+            ],
+            '2024-12-25': [
+                { time: 'All Day', title: 'Christmas Day - No Classes' }
+            ],
+            '2024-12-31': [
+                { time: '20:00 - 23:59', title: 'New Year\'s Eve Study Session' }
+            ]
+        };
+
+        // Load user events from localStorage
+        function loadUserEvents() {
+            const userEvents = localStorage.getItem('studysync_calendar_events');
+            if (userEvents) {
+                const events = JSON.parse(userEvents);
+                // Merge with sample events
+                Object.keys(events).forEach(date => {
+                    if (sampleEvents[date]) {
+                        sampleEvents[date] = [...sampleEvents[date], ...events[date]];
+                    } else {
+                        sampleEvents[date] = events[date];
+                    }
+                });
+            }
+        }
+
+        // Save user events to localStorage
+        function saveUserEvents() {
+            // Extract only user-added events (not sample events)
+            const userEvents = {};
+            Object.keys(sampleEvents).forEach(date => {
+                const events = sampleEvents[date].filter(event => event.userAdded);
+                if (events.length > 0) {
+                    userEvents[date] = events;
+                }
+            });
+            localStorage.setItem('studysync_calendar_events', JSON.stringify(userEvents));
+        }
+
+        // Add event function
+        function addQuickEvent() {
+            // Use selected date if available, otherwise use today
+            const targetDate = selectedDate || new Date();
+            const dateString = formatDateForEvents(targetDate);
+            
+            const title = prompt('Enter event title:');
+            if (!title || title.trim() === '') return;
+            
+            const time = prompt('Enter time (e.g., "14:00 - 15:30" or "All Day"):');
+            if (!time || time.trim() === '') return;
+            
+            const newEvent = {
+                time: time.trim(),
+                title: title.trim(),
+                userAdded: true
+            };
+            
+            if (!sampleEvents[dateString]) {
+                sampleEvents[dateString] = [];
+            }
+            
+            sampleEvents[dateString].push(newEvent);
+            saveUserEvents();
+            
+            // Refresh calendar and events display
+            generateCalendar(currentDate);
+            
+            // Show events for the date where event was added
+            if (selectedDate) {
+                showSelectedDateEvents(selectedDate);
+            } else {
+                showTodayEvents();
+            }
+            
+            const dateDisplay = targetDate.toLocaleDateString('en-US', { 
+                month: 'long', 
+                day: 'numeric' 
+            });
+            alert(`Event added successfully to ${dateDisplay}!`);
+        }
+
+        function initializeCalendar() {
+            loadUserEvents();
+            generateCalendar(currentDate);
+            showTodayEvents();
+        }
+
+        function generateCalendar(date) {
+            const year = date.getFullYear();
+            const month = date.getMonth();
+            
+            // Update calendar title
+            const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+                              'July', 'August', 'September', 'October', 'November', 'December'];
+            document.getElementById('calendarTitle').textContent = `${monthNames[month]} ${year}`;
+            
+            // Get first day of the month and number of days
+            const firstDay = new Date(year, month, 1);
+            const lastDay = new Date(year, month + 1, 0);
+            const daysInMonth = lastDay.getDate();
+            
+            // Get day of week for first day (0 = Sunday, but we want Monday = 0)
+            let startDay = firstDay.getDay();
+            startDay = startDay === 0 ? 6 : startDay - 1; // Convert to Monday = 0
+            
+            // Get previous month's last day
+            const prevMonth = new Date(year, month, 0);
+            const daysInPrevMonth = prevMonth.getDate();
+            
+            // Clear calendar
+            const calendarDates = document.getElementById('calendarDates');
+            calendarDates.innerHTML = '';
+            
+            // Add previous month's trailing days
+            for (let i = startDay - 1; i >= 0; i--) {
+                const dayNum = daysInPrevMonth - i;
+                const dateCell = createDateCell(dayNum, 'other-month', new Date(year, month - 1, dayNum));
+                calendarDates.appendChild(dateCell);
+            }
+            
+            // Add current month's days
+            for (let day = 1; day <= daysInMonth; day++) {
+                const cellDate = new Date(year, month, day);
+                const dateCell = createDateCell(day, 'current-month', cellDate);
+                calendarDates.appendChild(dateCell);
+            }
+            
+            // Add next month's leading days
+            const totalCells = calendarDates.children.length;
+            const remainingCells = 42 - totalCells; // 6 rows * 7 days = 42 cells
+            for (let day = 1; day <= remainingCells && totalCells < 42; day++) {
+                const dateCell = createDateCell(day, 'other-month', new Date(year, month + 1, day));
+                calendarDates.appendChild(dateCell);
+            }
+        }
+
+        function createDateCell(dayNum, monthType, fullDate) {
+            const dateCell = document.createElement('div');
+            dateCell.className = 'date-cell';
+            dateCell.textContent = dayNum;
+            
+            // Add month type class
+            if (monthType === 'other-month') {
+                dateCell.classList.add('other-month');
+            }
+            
+            // Check if it's today
+            const today = new Date();
+            if (fullDate.toDateString() === today.toDateString()) {
+                dateCell.classList.add('today');
+            }
+            
+            // Check if date has events
+            const dateString = formatDateForEvents(fullDate);
+            if (sampleEvents[dateString]) {
+                dateCell.classList.add('has-event');
+            }
+            
+            // Add click handler
+            dateCell.addEventListener('click', () => selectDate(fullDate, dateCell));
+            
+            return dateCell;
+        }
+
+        function formatDateForEvents(date) {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+
+        function selectDate(date, element) {
+            // Remove previous selection
+            document.querySelectorAll('.date-cell.selected').forEach(cell => {
+                cell.classList.remove('selected');
+            });
+            
+            // Add selection to clicked cell
+            element.classList.add('selected');
+            selectedDate = date;
+            
+            // Update add event button text
+            updateAddEventButton();
+            
+            // Show events for selected date
+            showSelectedDateEvents(date);
+        }
+
+        function updateAddEventButton() {
+            const addEventBtn = document.getElementById('addEventBtn');
+            const icon = addEventBtn.querySelector('svg');
+            
+            if (selectedDate) {
+                const today = new Date();
+                if (selectedDate.toDateString() === today.toDateString()) {
+                    addEventBtn.innerHTML = `${icon.outerHTML} Add Today's Event`;
+                } else {
+                    const dateDisplay = selectedDate.toLocaleDateString('en-US', { 
+                        month: 'short', 
+                        day: 'numeric' 
+                    });
+                    addEventBtn.innerHTML = `${icon.outerHTML} Add Event (${dateDisplay})`;
+                }
+            } else {
+                addEventBtn.innerHTML = `${icon.outerHTML} Add Today's Event`;
+            }
+        }
+
+        function showSelectedDateEvents(date) {
+            const dateString = formatDateForEvents(date);
+            const events = sampleEvents[dateString] || [];
+            
+            const selectedDateAppointment = document.getElementById('selectedDateAppointment');
+            const selectedDateTitle = document.getElementById('selectedDateTitle');
+            const selectedDateDetails = document.getElementById('selectedDateDetails');
+            
+            // Format date for display
+            const options = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            };
+            selectedDateTitle.textContent = date.toLocaleDateString('en-US', options);
+            
+            if (events.length > 0) {
+                selectedDateDetails.innerHTML = events.map(event => `
+                    <div style="margin-bottom: 10px;">
+                        <div class="appointment-time">${event.time}</div>
+                        <div>${event.title}</div>
+                    </div>
+                `).join('');
+            } else {
+                selectedDateDetails.innerHTML = '<div style="color: var(--gray); font-style: italic;">No events scheduled</div>';
+            }
+            
+            selectedDateAppointment.style.display = 'block';
+            
+            // Hide today's appointment if a different date is selected
+            const today = new Date();
+            if (date.toDateString() !== today.toDateString()) {
+                document.getElementById('todayAppointment').style.display = 'none';
+            }
+        }
+
+        function showTodayEvents() {
+            const today = new Date();
+            const todayString = formatDateForEvents(today);
+            const todayEvents = sampleEvents[todayString] || [];
+            
+            const todayAppointment = document.getElementById('todayAppointment');
+            const appointmentDetails = document.getElementById('appointmentDetails');
+            
+            if (todayEvents.length > 0) {
+                appointmentDetails.innerHTML = todayEvents.map(event => `
+                    <div style="margin-bottom: 10px;">
+                        <div class="appointment-time">${event.time}</div>
+                        <div>${event.title}</div>
+                    </div>
+                `).join('');
+                todayAppointment.style.display = 'block';
+            } else {
+                todayAppointment.style.display = 'none';
+            }
+        }
+
+        function previousMonth() {
+            currentDate.setMonth(currentDate.getMonth() - 1);
+            generateCalendar(currentDate);
+            
+            // Reset selected date and button
+            selectedDate = null;
+            updateAddEventButton();
+            
+            // Hide selected date appointment when navigating
+            document.getElementById('selectedDateAppointment').style.display = 'none';
+            
+            // Show today's events if we're back to current month
+            const today = new Date();
+            if (currentDate.getMonth() === today.getMonth() && currentDate.getFullYear() === today.getFullYear()) {
+                showTodayEvents();
+            } else {
+                document.getElementById('todayAppointment').style.display = 'none';
+            }
+        }
+
+        function nextMonth() {
+            currentDate.setMonth(currentDate.getMonth() + 1);
+            generateCalendar(currentDate);
+            
+            // Reset selected date and button
+            selectedDate = null;
+            updateAddEventButton();
+            
+            // Hide selected date appointment when navigating
+            document.getElementById('selectedDateAppointment').style.display = 'none';
+            
+            // Show today's events if we're back to current month
+            const today = new Date();
+            if (currentDate.getMonth() === today.getMonth() && currentDate.getFullYear() === today.getFullYear()) {
+                showTodayEvents();
+            } else {
+                document.getElementById('todayAppointment').style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
